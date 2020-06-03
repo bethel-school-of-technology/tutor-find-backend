@@ -4,6 +4,10 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema(
   {
+    tutor: {
+      type: Boolean,
+      required: true
+    },
     username: {
       type: String,
       required: true,
@@ -11,6 +15,24 @@ const userSchema = new Schema(
       trim: true,
       minlength: 3,
     },
+    firstname: {
+      type: String,
+      required: true,
+      minlength: 3
+    },
+    lastname: {
+      type: String,
+      required: true,
+      minlength: 3
+    },
+    timezone: {
+      type: String,
+      required: true
+    },
+    subject: {
+      type: String,
+      required: false
+    }
   },
   {
     timestamps: true,
