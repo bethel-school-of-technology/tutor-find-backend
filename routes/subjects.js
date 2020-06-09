@@ -8,16 +8,16 @@ router.route('/').get((req, res) => {
 });
 
 router.route('/add').post((req, res) => {
-    const username = req.body.username;
+    const subject = req.body.subject;
     const description = req.body.description;
     const duration = Number(req.body.duration);
-    const date = Date.parse(req.body.date);
+    
 
     const newSubject = new Subject({
-        username,
+        subject,
         description,
         duration,
-        date,
+        
     });
 
     newSubject.save()
@@ -40,10 +40,9 @@ router.route('/:id').delete((req, res) => {
 router.route('/update/:id').post((req, res) => {
     Subject.findById(req.params.id)
         .then(subject => {
-            subject.username = req.body.username;
+            subject.subject = req.body.subject;
             subject.description = req.body.description;
             subject.duration = Number(req.body.duration);
-            subject.date = Date.parse(req.body.date);
 
             subject.save()
                 .then(() => res.json('Subject updated!'))
