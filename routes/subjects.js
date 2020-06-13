@@ -4,16 +4,18 @@ let Subject = require('../models/subject.model');
 router.route('/').get((req, res) => {
     Subject.find()
         .then(subjects => res.json(subjects))
-        .catch(err => res.status(roo).json('Error: ' + err));
+        .catch(err => res.status(400).json('Error: ' + err));
 });
 
 router.route('/add').post((req, res) => {
+    const username = req.body.username;
     const subject = req.body.subject;
     const description = req.body.description;
     const duration = Number(req.body.duration);
     
 
     const newSubject = new Subject({
+        username, 
         subject,
         description,
         duration,

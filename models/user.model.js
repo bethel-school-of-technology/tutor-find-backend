@@ -34,16 +34,9 @@ const userSchema = new Schema(
       required: false
     },
     contacts: {
-      type: String,
-      required: true
-    },
-    minutes: {
       type: Number,
-      required: true
+      required: false
     }
-  },
-  {
-    timestamps: true,
   }
 );
 

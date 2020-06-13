@@ -8,9 +8,23 @@ router.route('/').get((req, res) => {
 });
 
 router.route('/add').post((req, res) => {
+    const tutor = Boolean(req.body.tutor);
     const username = req.body.username;
+    const firstname = req.body.firstname;
+    const lastname = req.body.lastname;
+    const timezone = req.body.timezone;
+    const subject = req.body.subject;
+    const contacts = req.body.contacts;
 
-    const newUser = new User({ username });
+    const newUser = new User({ 
+        tutor,
+        username,
+        firstname,
+        lastname,
+        timezone,
+        subject,
+        contacts
+    });
 
     newUser.save()
         .then(() => res.json('User added!'))
