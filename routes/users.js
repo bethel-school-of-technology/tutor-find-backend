@@ -8,27 +8,27 @@ router.route('/').get((req, res) => {
 });
 
 router.route('/add').post((req, res) => {
-    const tutor = Boolean(req.body.tutor);
-    const username = req.body.username;
-    const firstname = req.body.firstname;
-    const lastname = req.body.lastname;
-    const timezone = req.body.timezone;
-    const subject = req.body.subject;
-    const contacts = req.body.contacts;
+    const username = req.body.userName;
+    const password = req.body.password;
 
     const newUser = new User({ 
-        tutor,
         username,
-        firstname,
-        lastname,
-        timezone,
-        subject,
-        contacts
+        password
     });
 
     newUser.save()
         .then(() => res.json('User added!'))
         .catch(err => res.status(400).json('Error: ' + err));
 });
+
+router.route('/login').post((req, res) => {
+    const username = req.body.userName;
+    const password = req.body.password;
+
+        User.findbyName({username: username})
+        .then(() => res.json('User added!'))
+        .catch(err => res.status(400).json('Error: ' + err));
+    });
+
 
 module.exports = router;
