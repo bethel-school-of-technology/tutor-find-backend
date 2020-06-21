@@ -9,13 +9,15 @@ router.route('/').get((req, res) => {
 
 router.route('/add').post((req, res) => {
     const username = req.body.username;
+    const email = req.body.email;
     const subject = req.body.subject;
     const description = req.body.description;
-    const duration = Number(req.body.duration);
+    const duration = req.body.duration;
     
 
     const newSubject = new Subject({
         username, 
+        email,
         subject,
         description,
         duration,
@@ -35,13 +37,15 @@ router.route('/:id').get((req, res) => {
 
 router.route('/:id').delete((req, res) => {
     Subject.findByIdAndDelete(req.params.id)
-        .then(subject => res.json('Subject deleted.'))
+        .then(() => res.json('Subject deleted.'))
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
 router.route('/update/:id').post((req, res) => {
     Subject.findById(req.params.id)
         .then(subject => {
+            subject.username = req.body.username;
+            subject.email = req.body.email;
             subject.subject = req.body.subject;
             subject.description = req.body.description;
             subject.duration = Number(req.body.duration);
